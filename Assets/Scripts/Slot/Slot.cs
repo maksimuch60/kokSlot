@@ -5,7 +5,7 @@ namespace Slot
 {
     public class Slot : MonoBehaviour
     {
-        [SerializeField] private Image _slotImage;
+        [SerializeField] private SpriteRenderer _spriteRenderer;
         
         
     }
