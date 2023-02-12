@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d303929b627c470b9eeaea73044ceb45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _reelSlotsPool: {fileID: 0}
   _reelSlots:
   - {fileID: 817949224373632700}
   - {fileID: 8273133102352541721}
@@ -57,6 +58,7 @@ MonoBehaviour:
   - {fileID: 8273133102294811921}
   - {fileID: 8273133102558257242}
   - {fileID: 8273133102052517047}
+  _spinTime: 5
   _spinSpeed: 5
 --- !u!1001 &2979041005694042606
 PrefabInstance:
