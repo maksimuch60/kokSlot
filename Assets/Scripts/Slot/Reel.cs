@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Configs;
+using DG.Tweening;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -11,9 +11,14 @@ namespace Slot
         [SerializeField] private ReelSlotsPool _reelSlotsPool;
         [SerializeField] private List<Slot> _reelSlots;
 
+        [Header("Move Animation Settings")]
         [SerializeField] private float _spinTime;
         [SerializeField] private float _spinSpeed;
+        [SerializeField] private float _bounceTime;
+        [SerializeField] private float _bounceHeight;
         
+        
+
         private bool _isSpinning;
 
         private float _tickTimer;
@@ -50,11 +55,10 @@ namespace Slot
         private void SetSlotSprite(Slot slot)
         {
             slot.SetSprite(_reelSlotsPool.GetSprite(_currentSlotIndex));
+            
             _currentSlotIndex++;
-            if (_currentSlotIndex >= _reelSlotsPool.SymbolList.Count)
-            {
-                _currentSlotIndex = 0;
-            }
+            
+            _currentSlotIndex %= _reelSlotsPool.SymbolList.Count;
         }
 
         private int CalculateReelIndex(int randomIndex)
@@ -65,15 +69,6 @@ namespace Slot
             }
             
             return randomIndex - 4;
-        }
-
-        public void Spin()
-        {
-            int randomIndex = Random.Range(0, _reelSlotsPool.SymbolList.Count);
-
-            _stopSlotIndex = CalculateReelIndex(randomIndex);
-
-            _isSpinning = true;
         }
 
         private void AnimateMoving()
@@ -94,7 +89,36 @@ namespace Slot
             {
                 _isSpinning = false;
                 _tickTimer = 0;
+
+                PerformBounce();
             }
+        }
+
+        private void PerformBounce()
+        {
+            int i = 0;
+            foreach (Slot reelSlot in _reelSlots)
+            {
+                reelSlot.gameObject.transform.
+                    DOMoveY(reelSlot.transform.position.y + _bounceHeight, _bounceTime / 2).
+                    SetEase(Ease.OutQuad).
+                    OnComplete(() =>
+                    {	
+                        reelSlot.gameObject.transform.
+                            DOMoveY(reelSlot.transform.position.y - _bounceHeight, _bounceTime / 2).
+                            SetEase(Ease.InQuad);
+                    });
+                i++;
+            }
+        }
+
+        public void Spin()
+        {
+            int randomIndex = Random.Range(0, _reelSlotsPool.SymbolList.Count);
+
+            _stopSlotIndex = CalculateReelIndex(randomIndex);
+
+            _isSpinning = true;
         }
     }
 }

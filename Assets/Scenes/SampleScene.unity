@@ -816,6 +816,14 @@ PrefabInstance:
       value: Reel
       objectReference: {fileID: 0}
     - target: {fileID: 5827179388886200556, guid: 7bcd9344853395940b3bfba0ad558d11, type: 3}
+      propertyPath: _bounceTime
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5827179388886200556, guid: 7bcd9344853395940b3bfba0ad558d11, type: 3}
+      propertyPath: _bounceHeight
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5827179388886200556, guid: 7bcd9344853395940b3bfba0ad558d11, type: 3}
       propertyPath: _reelSlotsPool
       value: 
       objectReference: {fileID: 11400000, guid: abb6e33932cf096448e53919ea82209b, type: 2}
