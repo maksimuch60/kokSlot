@@ -12,13 +12,13 @@ namespace Configs
         [SerializeField] private SymbolSprites _symbolSprites;
         public List<SymbolType> SymbolList;
 
-        private void OnValidate()
+        /*private void OnValidate()
         {
             for(int i = 0; i < SymbolList.Count; i++)
             {
                 SymbolList[i] = (SymbolType)Random.Range(0, (int)(SymbolType.Count));
             }
-        }
+        }*/
 
         public Sprite GetSprite(int index)
         {

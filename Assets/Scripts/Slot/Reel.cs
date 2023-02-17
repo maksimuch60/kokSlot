@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using Configs;
 using UnityEngine;
@@ -17,6 +16,11 @@ namespace Slot
         
         private bool _isSpinning;
 
+        private float _tickTimer;
+        private int _startSlotIndex;
+        private int _currentSlotIndex;
+        private int _stopSlotIndex;
+
         private void Awake()
         {
             InitSlots();
@@ -27,34 +31,70 @@ namespace Slot
             if (!_isSpinning)
                 return;
             
-            
+            AnimateMoving();
         }
 
         private void InitSlots()
         {
             int randomIndex = Random.Range(0, _reelSlotsPool.SymbolList.Count);
 
-            foreach (Slot reelSlot in _reelSlots)
+            _startSlotIndex = CalculateReelIndex(randomIndex);
+            _currentSlotIndex = _startSlotIndex;
+
+            for(int i = _reelSlots.Count - 1; i >= 0; i--)
             {
-                reelSlot.SetSprite(_reelSlotsPool.GetSprite(randomIndex));
-                randomIndex++;
-                if (randomIndex >= _reelSlotsPool.SymbolList.Count)
-                {
-                    randomIndex = 0;
-                }
+                SetSlotSprite(_reelSlots[i]);
             }
+        }
+
+        private void SetSlotSprite(Slot slot)
+        {
+            slot.SetSprite(_reelSlotsPool.GetSprite(_currentSlotIndex));
+            _currentSlotIndex++;
+            if (_currentSlotIndex >= _reelSlotsPool.SymbolList.Count)
+            {
+                _currentSlotIndex = 0;
+            }
+        }
+
+        private int CalculateReelIndex(int randomIndex)
+        {
+            if (randomIndex < 4)
+            {
+                randomIndex += _reelSlotsPool.SymbolList.Count - 1;
+            }
+            
+            return randomIndex - 4;
         }
 
         public void Spin()
         {
-            int stopSlotIndex = Random.Range(0, _reelSlotsPool.SymbolList.Count);
+            int randomIndex = Random.Range(0, _reelSlotsPool.SymbolList.Count);
 
-            StartCoroutine(PlaySpinAnimation(() => { }));
+            _stopSlotIndex = CalculateReelIndex(randomIndex);
+
+            _isSpinning = true;
         }
 
-        private IEnumerator PlaySpinAnimation(Action onCompleteCallback)
+        private void AnimateMoving()
         {
-            yield return null;
+            _tickTimer += Time.deltaTime;
+            
+            foreach (Slot reelSlot in _reelSlots)
+            {
+                reelSlot.gameObject.transform.Translate(Vector3.down * _spinSpeed * Time.deltaTime);
+                if (reelSlot.gameObject.transform.position.y < -3.5f)
+                {
+                    reelSlot.gameObject.transform.position = new Vector3(0, 2.5f, 0);
+                    SetSlotSprite(reelSlot);
+                }
+            }
+
+            if (_tickTimer > _spinTime)
+            {
+                _isSpinning = false;
+                _tickTimer = 0;
+            }
         }
     }
 }
