@@ -1,4 +1,4 @@
-﻿namespace Slot
+﻿namespace SlotMachine
 {
     public enum SymbolType
     {

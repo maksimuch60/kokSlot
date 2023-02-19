@@ -4,7 +4,7 @@ using DG.Tweening;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Slot
+namespace SlotMachine
 {
     public class Reel : MonoBehaviour
     {
@@ -80,7 +80,7 @@ namespace Slot
                 reelSlot.gameObject.transform.Translate(Vector3.down * _spinSpeed * Time.deltaTime);
                 if (reelSlot.gameObject.transform.position.y < -3.5f)
                 {
-                    reelSlot.gameObject.transform.position = new Vector3(0, 2.5f, 0);
+                    reelSlot.gameObject.transform.position = new Vector3(transform.position.x, 2.5f, 0);
                     SetSlotSprite(reelSlot);
                 }
             }
@@ -96,7 +96,6 @@ namespace Slot
 
         private void PerformBounce()
         {
-            int i = 0;
             foreach (Slot reelSlot in _reelSlots)
             {
                 reelSlot.gameObject.transform.
@@ -108,7 +107,6 @@ namespace Slot
                             DOMoveY(reelSlot.transform.position.y - _bounceHeight, _bounceTime / 2).
                             SetEase(Ease.InQuad);
                     });
-                i++;
             }
         }
 
