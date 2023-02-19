@@ -17,14 +17,14 @@ namespace SlotMachine
         [SerializeField] private float _bounceTime;
         [SerializeField] private float _bounceHeight;
         
-        
-
         private bool _isSpinning;
-
+        private bool _isStopped = true;
+        
         private float _tickTimer;
         private int _startSlotIndex;
         private int _currentSlotIndex;
         private int _stopSlotIndex;
+        private int _lastSlotsCounter;
 
         private void Awake()
         {
@@ -33,7 +33,7 @@ namespace SlotMachine
 
         private void Update()
         {
-            if (!_isSpinning)
+            if (!_isSpinning && _isStopped)
                 return;
             
             AnimateMoving();
@@ -44,6 +44,7 @@ namespace SlotMachine
             int randomIndex = Random.Range(0, _reelSlotsPool.SymbolList.Count);
 
             _startSlotIndex = CalculateReelIndex(randomIndex);
+            
             _currentSlotIndex = _startSlotIndex;
 
             for(int i = _reelSlots.Count - 1; i >= 0; i--)
@@ -55,6 +56,11 @@ namespace SlotMachine
         private void SetSlotSprite(Slot slot)
         {
             slot.SetSprite(_reelSlotsPool.GetSprite(_currentSlotIndex));
+
+            if (!_isSpinning && !_isStopped)
+            {
+                _lastSlotsCounter++;
+            }
             
             _currentSlotIndex++;
             
@@ -74,6 +80,11 @@ namespace SlotMachine
         private void AnimateMoving()
         {
             _tickTimer += Time.deltaTime;
+
+            if (!_isSpinning && _lastSlotsCounter < 1)
+            {
+                _currentSlotIndex = _stopSlotIndex;
+            }
             
             foreach (Slot reelSlot in _reelSlots)
             {
@@ -88,10 +99,19 @@ namespace SlotMachine
             if (_tickTimer > _spinTime)
             {
                 _isSpinning = false;
-                _tickTimer = 0;
+            }
 
+            if (_lastSlotsCounter > 5)
+            {
+                _isStopped = true;
                 PerformBounce();
             }
+        }
+
+        private void ResetSpin()
+        {
+            _tickTimer = 0;
+            _lastSlotsCounter = 0;
         }
 
         private void PerformBounce()
@@ -115,8 +135,11 @@ namespace SlotMachine
             int randomIndex = Random.Range(0, _reelSlotsPool.SymbolList.Count);
 
             _stopSlotIndex = CalculateReelIndex(randomIndex);
+            
+            ResetSpin();
 
             _isSpinning = true;
+            _isStopped = false;
         }
     }
 }
