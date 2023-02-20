@@ -60,6 +60,8 @@ MonoBehaviour:
   - {fileID: 8273133102052517047}
   _spinTime: 5
   _spinSpeed: 5
+  _bounceTime: 0
+  _bounceHeight: 0
 --- !u!1001 &2979041005694042606
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -140,6 +142,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5827179388886200557}
     m_Modifications:
+    - target: {fileID: 2454002745186713426, guid: f10ad5568d8dcb84b9822abf4154e231, type: 3}
+      propertyPath: _positionInReel
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8757780286469858800, guid: f10ad5568d8dcb84b9822abf4154e231, type: 3}
       propertyPath: m_Name
       value: Slot (3)
@@ -213,6 +219,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5827179388886200557}
     m_Modifications:
+    - target: {fileID: 2454002745186713426, guid: f10ad5568d8dcb84b9822abf4154e231, type: 3}
+      propertyPath: _positionInReel
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8757780286469858800, guid: f10ad5568d8dcb84b9822abf4154e231, type: 3}
       propertyPath: m_Name
       value: Slot (5)
@@ -286,6 +296,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5827179388886200557}
     m_Modifications:
+    - target: {fileID: 2454002745186713426, guid: f10ad5568d8dcb84b9822abf4154e231, type: 3}
+      propertyPath: _positionInReel
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8757780286469858800, guid: f10ad5568d8dcb84b9822abf4154e231, type: 3}
       propertyPath: m_Name
       value: Slot (2)
@@ -359,6 +373,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5827179388886200557}
     m_Modifications:
+    - target: {fileID: 2454002745186713426, guid: f10ad5568d8dcb84b9822abf4154e231, type: 3}
+      propertyPath: _positionInReel
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8757780286469858800, guid: f10ad5568d8dcb84b9822abf4154e231, type: 3}
       propertyPath: m_Name
       value: Slot (1)
@@ -432,6 +450,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5827179388886200557}
     m_Modifications:
+    - target: {fileID: 2454002745186713426, guid: f10ad5568d8dcb84b9822abf4154e231, type: 3}
+      propertyPath: _positionInReel
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8757780286469858800, guid: f10ad5568d8dcb84b9822abf4154e231, type: 3}
       propertyPath: m_Name
       value: Slot (4)

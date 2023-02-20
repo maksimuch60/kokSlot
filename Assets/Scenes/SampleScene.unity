@@ -275,7 +275,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5827179388886200556, guid: 7bcd9344853395940b3bfba0ad558d11, type: 3}
       propertyPath: _bounceHeight
-      value: 0.5
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5827179388886200556, guid: 7bcd9344853395940b3bfba0ad558d11, type: 3}
       propertyPath: _reelSlotsPool
@@ -783,7 +783,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spinButton: {fileID: 1240139897}
-  _slotMachine: {fileID: 0}
+  _slotMachine: {fileID: 1256148157}
 --- !u!1 &1256148156
 GameObject:
   m_ObjectHideFlags: 0
@@ -952,7 +952,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5827179388886200556, guid: 7bcd9344853395940b3bfba0ad558d11, type: 3}
       propertyPath: _bounceHeight
-      value: 0.5
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5827179388886200556, guid: 7bcd9344853395940b3bfba0ad558d11, type: 3}
       propertyPath: _reelSlotsPool
@@ -1043,7 +1043,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5827179388886200556, guid: 7bcd9344853395940b3bfba0ad558d11, type: 3}
       propertyPath: _bounceHeight
-      value: 0.5
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5827179388886200556, guid: 7bcd9344853395940b3bfba0ad558d11, type: 3}
       propertyPath: _reelSlotsPool
@@ -1191,7 +1191,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5827179388886200556, guid: 7bcd9344853395940b3bfba0ad558d11, type: 3}
       propertyPath: _bounceHeight
-      value: 0.5
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5827179388886200556, guid: 7bcd9344853395940b3bfba0ad558d11, type: 3}
       propertyPath: _reelSlotsPool
@@ -1240,6 +1240,18 @@ PrefabInstance:
     - target: {fileID: 5827179388886200557, guid: 7bcd9344853395940b3bfba0ad558d11, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8273133102294811921, guid: 7bcd9344853395940b3bfba0ad558d11, type: 3}
+      propertyPath: _positionInReel
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8273133102352541721, guid: 7bcd9344853395940b3bfba0ad558d11, type: 3}
+      propertyPath: _positionInReel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8273133103067834685, guid: 7bcd9344853395940b3bfba0ad558d11, type: 3}
+      propertyPath: _positionInReel
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bcd9344853395940b3bfba0ad558d11, type: 3}

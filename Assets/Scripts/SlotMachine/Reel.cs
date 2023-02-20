@@ -26,6 +26,8 @@ namespace SlotMachine
         private int _stopSlotIndex;
         private int _lastSlotsCounter;
 
+        public int StopSlotIndex => _stopSlotIndex;
+
         private void Awake()
         {
             InitSlots();
@@ -92,6 +94,10 @@ namespace SlotMachine
                 if (reelSlot.gameObject.transform.position.y < -3.5f)
                 {
                     reelSlot.gameObject.transform.position = new Vector3(transform.position.x, 2.5f, 0);
+                    foreach (Slot reelSlot1 in _reelSlots)
+                    {
+                        reelSlot1.ChangePosition();
+                    }
                     SetSlotSprite(reelSlot);
                 }
             }
