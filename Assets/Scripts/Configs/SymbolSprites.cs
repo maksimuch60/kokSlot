@@ -6,6 +6,6 @@ namespace Configs
     [CreateAssetMenu(fileName = "SymbolSprites", menuName = "Configs/SymbolSprites")]
     public class SymbolSprites : ScriptableObject
     {
-        public List<Sprite> Sprites;
+        public List<Sprite> Sprites; 
     }
 }

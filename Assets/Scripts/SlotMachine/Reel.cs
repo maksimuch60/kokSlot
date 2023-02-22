@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Configs;
 using DG.Tweening;
 using UnityEngine;
@@ -25,6 +26,8 @@ namespace SlotMachine
         private int _currentSlotIndex;
         private int _stopSlotIndex;
         private int _lastSlotsCounter;
+
+        public event Action<int> OnStopIndexCalculated;
 
         public int StopSlotIndex => _stopSlotIndex;
 
@@ -141,6 +144,7 @@ namespace SlotMachine
             int randomIndex = Random.Range(0, _reelSlotsPool.SymbolList.Count);
 
             _stopSlotIndex = CalculateReelIndex(randomIndex);
+            OnStopIndexCalculated?.Invoke(_stopSlotIndex);
             
             ResetSpin();
 
