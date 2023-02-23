@@ -8,9 +8,9 @@ namespace SlotMachine
     {
         [SerializeField] private List<Reel> _reels;
 
-        private List<int> _stopIndexes = new();
+        private readonly List<int> _stopIndexes = new();
 
-        public event Action<List<int>> OnEnableStopIndexes;
+        public event Action<SymbolType[,]> OnEnableStopIndexes;
 
         private void OnEnable()
         {
@@ -34,12 +34,24 @@ namespace SlotMachine
             
             if (_stopIndexes.Count == 5)
             {
-                OnEnableStopIndexes?.Invoke(_stopIndexes);
+                int reelIndex = 0;
+                SymbolType[,] symbolTypesMatrix = new SymbolType[4,5];
+                foreach (Reel reel in _reels)
+                {
+                    SymbolType[] symbolTypesArray = reel.GetPlaySymbols();
+                    for (int i = 0; i < 4; i++)
+                    {
+                        symbolTypesMatrix[i, reelIndex] = symbolTypesArray[i];
+                    }
+                    reelIndex++;
+                }
+                OnEnableStopIndexes?.Invoke(symbolTypesMatrix);
             }
         }
 
         public void SpinAllReels()
         {
+            _stopIndexes.Clear();
             foreach (Reel reel in _reels)
             {
                 reel.Spin();

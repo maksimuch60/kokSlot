@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Configs;
 using DG.Tweening;
 using UnityEngine;
@@ -26,6 +27,7 @@ namespace SlotMachine
         private int _currentSlotIndex;
         private int _stopSlotIndex;
         private int _lastSlotsCounter;
+        private float[] _startPositions = {2f, 1f, 0f, -1f, -2f, -3f};
 
         public event Action<int> OnStopIndexCalculated;
 
@@ -94,9 +96,9 @@ namespace SlotMachine
             foreach (Slot reelSlot in _reelSlots)
             {
                 reelSlot.gameObject.transform.Translate(Vector3.down * _spinSpeed * Time.deltaTime);
-                if (reelSlot.gameObject.transform.position.y < -3.5f)
+                if (reelSlot.gameObject.transform.position.y < -4f)
                 {
-                    reelSlot.gameObject.transform.position = new Vector3(transform.position.x, 2.5f, 0);
+                    reelSlot.gameObject.transform.position = new Vector3(transform.position.x, 2f, 0);
                     foreach (Slot reelSlot1 in _reelSlots)
                     {
                         reelSlot1.ChangePosition();
@@ -117,12 +119,6 @@ namespace SlotMachine
             }
         }
 
-        private void ResetSpin()
-        {
-            _tickTimer = 0;
-            _lastSlotsCounter = 0;
-        }
-
         private void PerformBounce()
         {
             foreach (Slot reelSlot in _reelSlots)
@@ -139,6 +135,20 @@ namespace SlotMachine
             }
         }
 
+        private void FixPositions()
+        {
+            foreach (Slot slot in _reelSlots)
+            {
+                slot.gameObject.transform.position = new Vector3(transform.position.x, _startPositions[slot.PositionInReel]);
+            }
+        }
+
+        private void ResetSpin()
+        {
+            _tickTimer = 0;
+            _lastSlotsCounter = 0;
+        }
+
         public void Spin()
         {
             int randomIndex = Random.Range(0, _reelSlotsPool.SymbolList.Count);
@@ -150,6 +160,32 @@ namespace SlotMachine
 
             _isSpinning = true;
             _isStopped = false;
+        }
+
+        public SymbolType[] GetPlaySymbols()
+        {
+            SymbolType[] playSymbols = new SymbolType[4];
+            int startIndex;
+            if (_stopSlotIndex == _reelSlotsPool.SymbolList.Count - 1)
+            {
+                startIndex = 0;
+            }
+            else
+            {
+                startIndex = _stopSlotIndex + 1;
+            }
+
+            for (int i = 3; i >= 0; i--)
+            {
+                playSymbols[i] = _reelSlotsPool.SymbolList[startIndex];
+                startIndex++;
+                if (startIndex == _reelSlotsPool.SymbolList.Count)
+                {
+                    startIndex = 0;
+                }
+            }
+
+            return playSymbols;
         }
     }
 }
