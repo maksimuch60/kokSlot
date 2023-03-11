@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Configs;
+using Game.RateModule;
 using UnityEngine;
 
 namespace Game.SlotMachine
@@ -13,6 +14,7 @@ namespace Game.SlotMachine
         private SymbolType[,] _lineSymbolsMatrix;
         private int[] _symbolCounterInRowArray;
         private SymbolType[] _linePaySymbol;
+        private float _winValue;
 
         private void Awake()
         {
@@ -83,7 +85,20 @@ namespace Game.SlotMachine
             {
                 if (_symbolCounterInRowArray[i] > 1)
                 {
-                    Debug.Log($"{_lines[i].name}: {_symbolCounterInRowArray[i]} in a row of {_linePaySymbol[i].ToString()}");
+                    CalculateMultiplier(_linePaySymbol[i], _symbolCounterInRowArray[i]);
+                    Debug.Log($"{_lines[i].name}: {_symbolCounterInRowArray[i]} in a row of {_linePaySymbol[i].ToString()} --- {_winValue} ---");
+                }
+            }
+        }
+
+        private void CalculateMultiplier(SymbolType paySymbol, int symbolCounterInRow)
+        {
+            foreach (SymbolSettings symbolSetting in _multipliesSettings.MultipliesSettingsList)
+            {
+                if (symbolSetting.SymbolType == paySymbol)
+                {
+                    float multiplier = symbolSetting.MultiplyArray[symbolCounterInRow - 1];
+                    _winValue = multiplier * Rate.CurrentRate;
                 }
             }
         }
