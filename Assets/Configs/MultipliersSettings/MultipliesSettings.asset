@@ -12,4 +12,74 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 946c263ba64341ba908ac61e3838fea0, type: 3}
   m_Name: MultipliesSettings
   m_EditorClassIdentifier: 
-  MultipliesSettingsList: []
+  MultipliesSettingsList:
+  - SymbolType: 0
+    MultiplyArray:
+    - 0
+    - 0
+    - 0.5
+    - 2.5
+    - 10
+  - SymbolType: 1
+    MultiplyArray:
+    - 0
+    - 0
+    - 0.5
+    - 2.5
+    - 10
+  - SymbolType: 2
+    MultiplyArray:
+    - 0
+    - 0
+    - 0.5
+    - 2.5
+    - 10
+  - SymbolType: 3
+    MultiplyArray:
+    - 0
+    - 0
+    - 0.5
+    - 4
+    - 15
+  - SymbolType: 4
+    MultiplyArray:
+    - 0
+    - 0
+    - 0.5
+    - 4
+    - 15
+  - SymbolType: 5
+    MultiplyArray:
+    - 0
+    - 0.5
+    - 3
+    - 10
+    - 75
+  - SymbolType: 6
+    MultiplyArray:
+    - 0
+    - 0.5
+    - 3
+    - 10
+    - 75
+  - SymbolType: 7
+    MultiplyArray:
+    - 0
+    - 0.5
+    - 4
+    - 40
+    - 200
+  - SymbolType: 8
+    MultiplyArray:
+    - 0
+    - 1
+    - 10
+    - 100
+    - 500
+  - SymbolType: 9
+    MultiplyArray:
+    - -1
+    - -1
+    - -1
+    - -1
+    - -1

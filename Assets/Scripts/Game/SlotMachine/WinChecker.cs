@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Configs;
 using Game.RateModule;
 using UnityEngine;
@@ -15,6 +16,12 @@ namespace Game.SlotMachine
         private int[] _symbolCounterInRowArray;
         private SymbolType[] _linePaySymbol;
         private float _winValue;
+        private float _spinMultiplier;
+
+        public event Action<float> OnValueChanged;
+
+        public float WinValue => _winValue;
+        public float SpinMultiplier => _spinMultiplier;
 
         private void Awake()
         {
@@ -32,8 +39,11 @@ namespace Game.SlotMachine
             _slotMachine.OnEnableStopIndexes -= CalculateWin;
         }
 
-        private void CalculateWin(SymbolType[,] playSymbolsMatrix)
+        public void CalculateWin(SymbolType[,] playSymbolsMatrix)
         {
+            _winValue = 0;
+            _spinMultiplier = 0;
+            
             for (int i = 0; i < 5; i++)
             {
                 for (int j = 0; j < 4; j++)
@@ -86,9 +96,15 @@ namespace Game.SlotMachine
                 if (_symbolCounterInRowArray[i] > 1)
                 {
                     CalculateMultiplier(_linePaySymbol[i], _symbolCounterInRowArray[i]);
-                    Debug.Log($"{_lines[i].name}: {_symbolCounterInRowArray[i]} in a row of {_linePaySymbol[i].ToString()} --- {_winValue} ---");
                 }
             }
+
+            ChangeWinValue();
+        }
+
+        private void ChangeWinValue()
+        {
+            OnValueChanged?.Invoke(_winValue);
         }
 
         private void CalculateMultiplier(SymbolType paySymbol, int symbolCounterInRow)
@@ -98,7 +114,8 @@ namespace Game.SlotMachine
                 if (symbolSetting.SymbolType == paySymbol)
                 {
                     float multiplier = symbolSetting.MultiplyArray[symbolCounterInRow - 1];
-                    _winValue = multiplier * Rate.CurrentRate;
+                    _spinMultiplier += multiplier;
+                    _winValue += multiplier * Rate.CurrentRate;
                 }
             }
         }

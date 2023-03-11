@@ -4,7 +4,7 @@ namespace Game.RateModule
 {
     public static class Rate
     {
-        public static readonly int[] RateArray = {10, 20, 30, 40, 50};
+        public static readonly int[] RateArray = {1, 10, 20, 30, 40, 50};
         private static int _currentRate;
         public static int CurrentRate => _currentRate;
         
