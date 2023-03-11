@@ -1,4 +1,4 @@
-﻿namespace SlotMachine
+﻿namespace Game.SlotMachine
 {
     public enum SymbolType
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using SlotMachine;
+using Game.SlotMachine;
 using UnityEngine;
 using Random = UnityEngine.Random;
 

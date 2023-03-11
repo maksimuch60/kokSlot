@@ -1,18 +1,16 @@
-﻿// ReSharper disable once RedundantUsingDirective
-using System;
+﻿using Game.RateModule;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace UI.GameUI
 {
-    public class Rate : MonoBehaviour
+    public class RateUI : MonoBehaviour
     {
         [SerializeField] private Button _increaseButton;
         [SerializeField] private Button _decreaseButton;
         [SerializeField] private TextMeshProUGUI _rateLabel;
-
-        private readonly int[] _rateArray = {10, 20, 30, 40, 50};
+        
         private int _currentIndex;
 
         private void Awake()
@@ -26,7 +24,7 @@ namespace UI.GameUI
 
         private void IncreaseButtonClicked()
         {
-            if (_currentIndex < _rateArray.Length - 1)
+            if (_currentIndex < Rate.RateArray.Length - 1)
             {
                 _currentIndex++;
             }
@@ -46,7 +44,7 @@ namespace UI.GameUI
 
         private void SetRateText()
         {
-            _rateLabel.text = _rateArray[_currentIndex].ToString();
+            _rateLabel.text = Rate.GetRate(_currentIndex).ToString();
         }
     }
 }

@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Configs;
 using UnityEngine;
 
-namespace SlotMachine
+namespace Game.SlotMachine
 {
     public class WinChecker : MonoBehaviour
     {
         [SerializeField] private SlotMachine _slotMachine;
-
+        [SerializeField] private MultipliesSettings _multipliesSettings;
         [SerializeField] private List<Line> _lines;
 
         private SymbolType[,] _lineSymbolsMatrix;

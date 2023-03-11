@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Configs;
 using DG.Tweening;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace SlotMachine
+namespace Game.SlotMachine
 {
     public class Reel : MonoBehaviour
     {

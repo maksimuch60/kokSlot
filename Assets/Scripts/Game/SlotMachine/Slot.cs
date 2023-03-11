@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace SlotMachine
+namespace Game.SlotMachine
 {
     public class Slot : MonoBehaviour
     {

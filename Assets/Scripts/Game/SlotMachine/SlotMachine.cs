@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SlotMachine
+namespace Game.SlotMachine
 {
     public class SlotMachine : MonoBehaviour
     {

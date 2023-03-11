@@ -1,4 +1,4 @@
-﻿using SlotMachine;
+﻿using Game.SlotMachine;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,7 +7,7 @@ namespace UI.GameUI
     public class SpinButton : MonoBehaviour
     {
         [SerializeField] private Button _spinButton;
-        [SerializeField] private SlotMachine.SlotMachine _slotMachine;
+        [SerializeField] private SlotMachine _slotMachine;
         
 
         private void Awake()
