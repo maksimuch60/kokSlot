@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Configs;
 using Game.RateModule;
 using Game.SlotMachine;
@@ -17,7 +16,8 @@ namespace Game.SimulationModule
         [SerializeField] private float[] _multipliersRange = {0, 0.5f, 1, 2, 3, 5, 10, 15, 20, 25, 30, 40, 50, 60, 70, 80, 100, 150, 250, 500};
         private List<int> _stopIndexes;
         private float _totalWin;
-        private Dictionary<float, int> _spinSpreadingTable = new();
+        private int _bonusGameCounter;
+        private readonly Dictionary<float, int> _spinSpreadingTable = new();
 
         private void Awake()
         {
@@ -38,14 +38,20 @@ namespace Game.SimulationModule
                 _winChecker.CalculateWin(symbolMatrix);
                 SpacingDefinition(_winChecker.SpinMultiplier);
                 _totalWin += _winChecker.WinValue;
+
+                if (_winChecker.ScatterCounter >= 3)
+                {
+                    _bonusGameCounter++;
+                }
             }
 
             foreach (KeyValuePair<float,int> pair in _spinSpreadingTable)
             {
                 Debug.Log($" <= {pair.Key} --- {pair.Value}");
             }
-
+            
             Debug.Log($"rtp: {_totalWin/(_simulationSpinCount * Rate.CurrentRate)}");
+            Debug.Log($"Bonus game hit cycle: {_simulationSpinCount / _bonusGameCounter}");
         }
 
         private void ClearTableValues()

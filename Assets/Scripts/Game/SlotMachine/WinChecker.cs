@@ -17,11 +17,14 @@ namespace Game.SlotMachine
         private SymbolType[] _linePaySymbol;
         private float _winValue;
         private float _spinMultiplier;
+        private int _scatterCounter;
 
         public event Action<float> OnValueChanged;
+        public event Action OnBonusGameWorked;
 
         public float WinValue => _winValue;
         public float SpinMultiplier => _spinMultiplier;
+        public int ScatterCounter => _scatterCounter;
 
         private void Awake()
         {
@@ -43,6 +46,7 @@ namespace Game.SlotMachine
         {
             _winValue = 0;
             _spinMultiplier = 0;
+            _scatterCounter = 0;
             
             for (int i = 0; i < 5; i++)
             {
@@ -53,6 +57,7 @@ namespace Game.SlotMachine
             }
 
             CheckLinesSymbols();
+            CheckBonusGame(playSymbolsMatrix);
             PrintWin();
         }
 
@@ -63,6 +68,20 @@ namespace Game.SlotMachine
                 if (_lines[i].SlotPosition[reel] == row + 1)
                 {
                     _lineSymbolsMatrix[i, reel] = symbolType;
+                }
+            }
+        }
+
+        private void CheckBonusGame(SymbolType[,] playSymbolsMatrix)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    if (playSymbolsMatrix[j,i] == SymbolType.MajorFive)
+                    {
+                        _scatterCounter++;
+                    }
                 }
             }
         }
@@ -99,7 +118,16 @@ namespace Game.SlotMachine
                 }
             }
 
+            PrintBonusGame();
             ChangeWinValue();
+        }
+
+        private void PrintBonusGame()
+        {
+            if (_scatterCounter >= 3)
+            {
+                OnBonusGameWorked?.Invoke();
+            }
         }
 
         private void ChangeWinValue()
